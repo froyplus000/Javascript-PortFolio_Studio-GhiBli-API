@@ -2,7 +2,9 @@
 const filmsURL = 'https://ghibliapi.herokuapp.com/films'
 const Display = document.getElementById('Display')
 const searchBtn = document.getElementById('searchBtn')
-const searchInput = document.getElementById('searchInput')
+
+
+
 //* Addevent Listener
 
 
@@ -31,7 +33,10 @@ function displayData(data) {
         var filmsTitle = document.createElement('h1');
         var titleText = document.createTextNode(data[i].title);
         filmsTitle.className = 'card-title'
+        filmsTitle.className = 'titleLists'
         filmsTitle.appendChild(titleText)
+        // titleList.push(data[i].title)
+
 
 
         //* Description
@@ -62,7 +67,26 @@ function displayData(data) {
 
         //* Output - Test Display
 
-        Display.appendChild(colDiv);
+        Display.appendChild(colDiv)
     }
 }
 loadData()
+
+const search = () => {
+    const searchInput = document.getElementById('searchInput').value.toLowerCase()
+    const filmCard = document.querySelectorAll('.col')
+    const TitleFS = document.getElementsByTagName('h1')
+
+    for (let i = 0; i < TitleFS.length; i++) {
+        let match = filmCard[i].getElementsByTagName('h1')[0]
+        if (match) {
+            let textvalue = match.textContent || match.innerHTML
+            if (textvalue.toLowerCase().indexOf(searchInput) > -1) {
+                filmCard[i].style.display = "inline"
+            } else {
+                filmCard[i].style.display = "none"
+            }
+        }
+    }
+
+}
