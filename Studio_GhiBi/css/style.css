@@ -1,0 +1,151 @@
+/* Utility class */
+
+.Ghibli-btn {
+
+    box-shadow: 0.75rem 0.75rem 1rem #DD8754;
+    /* text-shadow: 0.2rem 0.2rem 0.188rem #DD8754, -0.2rem -0.2rem 0.188rem #DD8754; */
+    color: #DD8754;
+    border: none;
+
+}
+
+.Ghibli-btn:hover {
+    color: white;
+    background-color: #DD8754;
+    border: none;
+    box-shadow: 0.75rem 0.75rem 1rem #9d655a;
+}
+
+
+.form-label {
+    font-size: 1.75rem;
+    color: white;
+    text-shadow: 0.25rem 0.25rem 0.188rem #9d655a;
+}
+
+.form-control {
+    border: 0.5px solid #9d655a;
+}
+
+.form-control::placeholder {
+    color: #DD8754;
+    opacity: 0.4;
+}
+
+/* Validation */
+
+.form-control:focus {
+    box-shadow: 0.5rem 0.5rem 1rem #9d655a, 0.5rem 0.5rem 1rem #9d655a;
+    color: #DD8754;
+    border: none;
+}
+
+
+
+/* Start styling */
+
+body {
+    font-family: 'IBM Plex Mono', monospace;
+    background-color: #ebb198;
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: 900;
+}
+
+
+/* navbar styling */
+
+#navbar {
+    background-color: #DD8754;
+    text-shadow: 0.25rem 0.25rem 0.188rem #ebb198, -1px -1px 1px #ebb198;
+}
+
+.navbar-brand {
+    font-family: 'Titan One', cursive;
+}
+
+/* Footer Styling */
+#footer {
+    background-color: #DD8754;
+    text-shadow: 0.25rem 0.25rem 0.188rem #ebb198, -1px -1px 1px #ebb198;
+}
+
+#footer p {
+    margin-bottom: 0;
+}
+
+
+
+
+
+/* Card Styling */
+
+#Display .card {
+    box-shadow: 0.25rem 0.25rem 1rem #DD8754;
+    border: none;
+}
+
+#Display .card:hover {
+    box-shadow: 0.75rem 0.75rem 1rem #9d655a, -0.45rem -0.45rem 1rem #9d655a;
+    border: none;
+}
+
+.card-body {
+    background-color: #f6d8c9;
+}
+
+/* Card height - Media queey */
+@media (min-width: 769px) {
+    .card-body {
+        height: 850px;
+    }
+}
+
+@media (min-width: 992px) {
+    .card-body {
+        height: 900px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .card-body {
+        height: 800px;
+    }
+}
+
+
+
+/* Carousel Styling */
+
+/* box shadow */
+.carousel-inner {
+    box-shadow: 0.75rem 0.75rem 1rem #DD8754;
+}
+
+/* text shadow */
+.carousel-caption h1,
+.carousel-caption p {
+    text-shadow: 0.25rem 0.25rem 0.188rem #DD8754, -1px -1px 1px #DD8754;
+}
+
+/* <h1>, <p> -> text size & margin */
+
+.carousel-caption h1 {
+    font-size: 2rem;
+}
+
+.carousel-caption p {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+
+
+
+/* Contact Styling */
+
+#contact {
+    background-color: #9d655a;
+}

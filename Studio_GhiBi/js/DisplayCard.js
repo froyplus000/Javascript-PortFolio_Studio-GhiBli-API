@@ -15,8 +15,8 @@ async function loadData() {
         const data = await response.json()
         // log 'data' in the console
         console.log(data)
-        // call 'displayData(data)' function
-        displayData(data)
+        // call 'displayCard(data)' function
+        displayCard(data)
 
         // catch (error){} -> catch error data and stored it in (error)
     } catch (error) {
@@ -24,10 +24,17 @@ async function loadData() {
         console.log(error)
     }
 }
+loadData()
 
-// create for loop that run through 'data.length' -> all array in the json data received from apk
-function displayData(data) {
 
+
+
+
+//* DisplayCard - Function
+// Function to display films card with the data fetched from api
+function displayCard(data) {
+
+    // Create for loop to filter data from api and display to web page
     for (let i = 0; i < data.length; i++) {
 
         //* Images
@@ -46,7 +53,7 @@ function displayData(data) {
         // creates textnode that had a value same as title in data array -> stored in variable
         var titleText = document.createTextNode(data[i].title);
         // add class name to this <h1> in order to use card style from bootstrap
-        filmsTitle.className = 'card-title'
+        filmsTitle.className = 'card-title mb-4'
         // append titleText to filmsTitle, so <h1> have same text as the one that been pulled out of the array in it
         filmsTitle.appendChild(titleText)
 
@@ -63,6 +70,17 @@ function displayData(data) {
         // append desText to filmsDes, so <p> have same text as the one that been pulled out of the array in it
         filmsDes.appendChild(desText)
 
+        //* Button
+        var modalBtn = document.createElement('a')
+        var btnText = document.createTextNode('More Details')
+        modalBtn.appendChild(btnText)
+        modalBtn.setAttribute('href', '#')
+        modalBtn.setAttribute('type', 'button')
+        modalBtn.setAttribute('data-bs-toggle', 'modal')
+        modalBtn.setAttribute('data-bs-target', '#exampleModal')
+        modalBtn.className = 'btn btn-light text-center Ghibli-btn'
+
+
         //* Create Div
 
         // creates <div> element and stored in variable
@@ -75,11 +93,10 @@ function displayData(data) {
         var cardDiv = document.createElement('div')
         // add class name to this <div> -> .card                                 = for bootstrap card styling
         cardDiv.className = ('card')
-
         // creates <div> element and stored in variable
         var cardBodyDiv = document.createElement('div')
         // add class name to this <div> -> .card-body                            = for bootstrap card styling
-        cardBodyDiv.className = ('card-body')
+        cardBodyDiv.className = ('card-body text-center')
 
         //* Append Child
         // Appended = card -> col
@@ -89,6 +106,7 @@ function displayData(data) {
         // Appended = title, description -> cardbody
         cardBodyDiv.appendChild(filmsTitle)
         cardBodyDiv.appendChild(filmsDes)
+        cardBodyDiv.appendChild(modalBtn)
         // Appended = card-body -> card
         cardDiv.appendChild(cardBodyDiv)
 
@@ -97,10 +115,10 @@ function displayData(data) {
         // Appended = col -> display = appended whole card to display in HTML file
         Display.appendChild(colDiv)
     }
+
 }
-loadData()
 
-
+//* Search Film with Title - Function 
 // create 'onkeyup' search() function - eventlistener already been assign to onkeyup by adding attribute in <input>
 search = () => {
     //* Variable for search function
