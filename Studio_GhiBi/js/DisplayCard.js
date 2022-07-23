@@ -77,7 +77,7 @@ function displayCard(data) {
         modalBtn.setAttribute('href', '#')
         modalBtn.setAttribute('type', 'button')
         modalBtn.setAttribute('data-bs-toggle', 'modal')
-        modalBtn.setAttribute('data-bs-target', '#exampleModal')
+        modalBtn.setAttribute('data-bs-target', '#FilmModal')
         modalBtn.className = 'btn btn-light text-center Ghibli-btn'
 
 
