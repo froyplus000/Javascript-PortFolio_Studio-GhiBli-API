@@ -57,9 +57,6 @@ function displayCard(data) {
         // append titleText to filmsTitle, so <h1> have same text as the one that been pulled out of the array in it
         filmsTitle.appendChild(titleText)
 
-
-
-
         //* Description
         // creates <p> element and stored in variable
         var filmsDes = document.createElement('p');
@@ -114,6 +111,45 @@ function displayCard(data) {
 
         // Appended = col -> display = appended whole card to display in HTML file
         Display.appendChild(colDiv)
+
+
+
+
+        //* Modal
+
+        document.getElementById('FilmModal').innerHTML = `<div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <!-- Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">Films title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- Body -->
+            <div class="modal-body">
+
+                <!-- Card in modal -->
+
+                <!-- IMG Overlay -->
+                <div class="card bg-dark text-white">
+                    <img src="${data[i].movie_banner}" class="card-img" alt="">
+
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">${data[i].original_title}</h5>
+                        <p class="card-text">${data[i].original_title_romanised}</p>
+                    </div>
+                </div>
+
+
+
+                <!-- /Card in modal -->
+
+            </div>
+            <!-- Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>`
     }
 
 }
