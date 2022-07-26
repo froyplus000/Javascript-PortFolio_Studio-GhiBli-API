@@ -82,12 +82,12 @@ h1 {
 
 /* Card Styling */
 
-#Display .card {
+#cardDisplay .card {
     box-shadow: 0.25rem 0.25rem 1rem #DD8754;
     border: none;
 }
 
-#Display .card:hover {
+#cardDisplay .card:hover {
     box-shadow: 0.75rem 0.75rem 1rem #9d655a, -0.45rem -0.45rem 1rem #9d655a;
     border: none;
 }

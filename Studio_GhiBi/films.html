@@ -14,9 +14,51 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300&family=Titan+One&display=swap"
         rel="stylesheet">
     <!-- CSS link  -->
+    <script src="./js/FilmCards.js"></script>
     <link rel="stylesheet" href="./css/style.css">
     <!-- Javascript link -->
     <title>Studio Ghibi Films Wiki</title>
+    <!-- Can't put this funtion into a OOP, need to put in html file in order for search to work -->
+    <script>
+        //* Search Film with Title - Function 
+        // create 'onkeyup' search() function - eventlistener already been assign to onkeyup by adding attribute in <input>
+        search = () => {
+            //* Variable for search function
+            // Get value from what user type in the Textbox and covert it to lower case, 
+            const searchInput = document.getElementById('searchInput').value.toLowerCase()
+            // const Display = document.getElementById('Display') -> this variable is needed for this function as well but it already been assign at the top of the page
+            // This variable contains all element with the '.col' -> possible when we use 'querySelectorAll'
+            // .col -> card -> img
+            //              -> card-body -> h1
+            //                           -> p   
+            const filmCard = document.querySelectorAll('.col')
+            // This variable contains h1 -> Film titles
+            const titleH1 = document.getElementsByTagName('h1')
+
+            // for loop, so we can re-arrange the film card according to the search value
+            for (let i = 0; i < titleH1.length; i++) {
+                // get the first <h1> in the filmCard(.col) and store that in the variable called "match"
+                let match = filmCard[i].getElementsByTagName('h1')[0]
+                // create if and pass on match (first h1 in .col, which contains title of film)
+                if (match) {
+                    // get content in match(<h1>) and store it in 'textValue'
+                    let textValue = match.textContent || match.innerHTML
+                    // create another if statement -> take textValue and convert it into lower case
+                    //                             -> indexOf(searchInput) -> each array(letter) in the searchinput value(converted to lower case)
+                    //                             ->       > -1           -> greater than '-1' means if its true or if it contain that array(letter)
+                    // Basically, it means if the value that user type in the 'searchInput' match the content in '<h1>' -> it will do the following code 
+                    if (textValue.toLowerCase().indexOf(searchInput) > -1) {
+                        // if the above condition is true, then card will be display 'block'
+                        filmCard[i].style.display = "block"
+                    } else {
+                        // if its not, then card will be display 'none'
+                        filmCard[i].style.display = "none"
+                    }
+                }
+            }
+
+        }
+    </script>
 </head>
 
 <body>
@@ -39,9 +81,6 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="films.html">Films</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact Us</a>
-                    </li>
                 </ul>
                 <form class="d-flex">
                     <input id="searchInput" class="form-control me-2" type="search" placeholder="Search"
@@ -57,7 +96,7 @@
 
     <!-- Display Card -->
     <div class="container">
-        <div id="Display" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-4"></div>
+        <div id="cardDisplay" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-4"></div>
     </div>
     <!-- /Display Card -->
 
@@ -122,7 +161,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <script src="./js/DisplayCard.js"></script>
+
 </body>
 
 </html>
