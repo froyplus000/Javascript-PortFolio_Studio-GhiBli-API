@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <!-- Javascript link -->
     <title>Studio Ghibi Films Wiki</title>
+
     <!-- Can't put this funtion into a OOP, need to put in html file in order for search to work -->
     <script>
         //* Search Film with Title - Function 
@@ -56,7 +57,6 @@
                     }
                 }
             }
-
         }
     </script>
 </head>
@@ -82,6 +82,7 @@
                         <a class="nav-link active" href="films.html">Films</a>
                     </li>
                 </ul>
+                <!-- Search on Navbar only avaliable on this page -->
                 <form class="d-flex">
                     <input id="searchInput" class="form-control me-2" type="search" placeholder="Search"
                         aria-label="Search" onkeyup="search()">
@@ -96,27 +97,51 @@
 
     <!-- Display Card -->
     <div class="container">
-        <div id="cardDisplay" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-4"></div>
+        <div id="cardDisplay" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-4">
+
+            <!-- start draft - This is like a draft to easily undstand on what element need to be create and appendChild in Javascript file -->
+
+            <!-- <div class="col">
+                <div class="card">
+                  <img src="${data[i].image}" class="card-img-top">
+                  <div class="card-body">
+                    <h5 class="card-title mb-4">${data[i].title}</h5>
+                    <p class="card-text">data[i].description</p>
+                    <a href="#" class="btn btn-light text-center Ghibli-btn" type="button" data-bs-toggle="modal" data-bs-target="#FilmModal${i}">More Details</a>
+                  </div>
+                </div>
+              </div> -->
+
+
+            <!-- end darft -->
+
+        </div>
     </div>
     <!-- /Display Card -->
 
-    <!-- Modal -->
-    <div class="modal fade" id="FilmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-        <!-- Start Copy -->
+
+
+    <!-- Modal -->
+    <!-- container for content from Javascript file to be add here -->
+    <div id="modalContainer"></div>
+
+    <!-- Start Draft -->
+    <!-- <div class="modal fade" id=`FilmModal${i}` tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <!-- Header -->
+
                 <div class="modal-header">
                     <h5 class="modal-title">Films title</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <!-- Body -->
+
                 <div class="modal-body">
 
-                    <!-- Card in modal -->
 
-                    <!-- IMG Overlay -->
+
+
                     <div class="card bg-dark text-white">
                         <img src="${data[i].movie_banner}" class="card-img" alt="">
 
@@ -128,19 +153,20 @@
 
 
 
-                    <!-- /Card in modal -->
+
 
                 </div>
-                <!-- Footer -->
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-        <!-- End Copy -->
+        
+    </div> -->
 
+    <!-- End Draft -->
 
-    </div>
     <!-- /Modal -->
 
 

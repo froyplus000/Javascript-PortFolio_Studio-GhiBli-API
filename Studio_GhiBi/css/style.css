@@ -1,7 +1,6 @@
 /* Utility class */
 
 .Ghibli-btn {
-
     box-shadow: 0.75rem 0.75rem 1rem #DD8754;
     /* text-shadow: 0.2rem 0.2rem 0.188rem #DD8754, -0.2rem -0.2rem 0.188rem #DD8754; */
     color: #DD8754;
@@ -15,7 +14,6 @@
     border: none;
     box-shadow: 0.75rem 0.75rem 1rem #9d655a;
 }
-
 
 .form-label {
     font-size: 1.75rem;
@@ -85,10 +83,11 @@ h1 {
 #cardDisplay .card {
     box-shadow: 0.25rem 0.25rem 1rem #DD8754;
     border: none;
+    transition: 0.3s;
 }
 
 #cardDisplay .card:hover {
-    box-shadow: 0.75rem 0.75rem 1rem #9d655a, -0.45rem -0.45rem 1rem #9d655a;
+    box-shadow: 0 0 0.7rem 0.5rem #9d655a;
     border: none;
 }
 
@@ -98,19 +97,19 @@ h1 {
 
 /* Card height - Media queey */
 @media (min-width: 769px) {
-    .card-body {
+    #cardDisplay .card-body {
         height: 850px;
     }
 }
 
 @media (min-width: 992px) {
-    .card-body {
+    #cardDisplay .card-body {
         height: 900px;
     }
 }
 
 @media (min-width: 1200px) {
-    .card-body {
+    #cardDisplay .card-body {
         height: 800px;
     }
 }
@@ -148,4 +147,74 @@ h1 {
 
 #contact {
     background-color: #9d655a;
+}
+
+
+
+
+
+
+/* Modal Header */
+.modal-header {
+    background-color: #DD8754;
+    text-shadow: 0.25rem 0.25rem 0.188rem #ebb198, -1px -1px 1px #ebb198;
+    border: none;
+}
+
+.modal-header h5 {
+    font-size: 2rem;
+}
+
+
+
+/* Modal Body */
+
+.modal-body,
+.modal-body .bg-dark {
+    background-color: #ebb198;
+    --bs-bg-opacity: 0;
+}
+
+.modal-body {
+    box-shadow: inset 0 0 0.5rem 0.1rem #DD8754;
+}
+
+.modal-body .card {
+    box-shadow: 0.2rem 0 1rem 0.2rem #9d655a;
+}
+
+.card-img-overlay {
+    text-shadow: 0.25rem 0.25rem 0.188rem #9d655a, -1px -1px 1px #9d655a;
+}
+
+.card-img-overlay h5 {
+    font-size: 1.6rem;
+}
+
+.card-body p,
+.card-body h1 {
+    color: #9d655a;
+}
+
+/* Modal footer */
+
+.modal-footer {
+    background-color: #DD8754;
+    border: none;
+}
+
+.modal-footer .Ghibli-btn {
+    z-index: 1;
+    background-color: white;
+    box-shadow: 0.2rem 0 1rem 0.2rem #9d655a;
+}
+
+.modal-footer .Ghibli-btn:hover {
+    background-color: #9d655a;
+    box-shadow: 0 0 0.5rem 0.1rem #ebb198;
+}
+
+#ModalFilmTitle {
+    padding-bottom: 1.5rem;
+    border-bottom: #9d655a 2px solid;
 }

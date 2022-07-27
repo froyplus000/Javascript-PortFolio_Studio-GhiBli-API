@@ -1,17 +1,9 @@
-// // This variable contain a url of an API
-// const apiURL = 'https://ghibliapi.herokuapp.com/films'
-// // This variable contain all card and data (including img, title and description) of Studio GHIBLI Films. It will be use in searchinput as well
-// const Display = document.getElementById('Display')
-
-
-
 class FilmCards {
 
-
     constructor() {
+        // creates empty array variable
         this.data = [];
     }
-
 
     //* Fetch Data - Change this to OOP Class
     // when we use await we need to put async in front of the function
@@ -20,16 +12,12 @@ class FilmCards {
         try {
             // fetch data from api, needed to have await otherwise it will return promise, store it in 'response'
             const response = await fetch('https://ghibliapi.herokuapp.com/films')
-            // filter response to json and store it in data variable
+            // filter response to json and store it in this.data variable
             this.data = await response.json()
-            // log 'data' in the console
+            // log 'this.data' in the console
             console.log(this.data)
-            // call 'displayCarousel(data)' function
-
-
+            // call 'displayCarousel(data)' function - need to add 'this.' when call a function inside a function
             this.displayCard(this.data)
-
-
 
             // catch (error){} -> catch error data and stored it in (error)
         } catch (error) {
@@ -45,8 +33,10 @@ class FilmCards {
     // Function to display films card with the data fetched from api
     displayCard(data) {
 
-        // Create for loop to filter data from api and display to web page
+        // for loop to loop data from api and create element every loop run
         for (let i = 0; i < data.length; i++) {
+
+            //? Content for Cards
 
             //* Images
             // creates <img> element and stored in variable
@@ -79,18 +69,22 @@ class FilmCards {
             filmsDes.appendChild(desText)
 
             //* Button
+            // create <a> element and stored in variable
             var modalBtn = document.createElement('a')
+            // create text node and stored in variable
             var btnText = document.createTextNode('More Details')
+            // <a> appendChild text node -> button had text inside
             modalBtn.appendChild(btnText)
-            modalBtn.setAttribute('href', '#')
+            // give a button classes
+            modalBtn.className = 'btn btn-light text-center Ghibli-btn'
+            // set attributes for button
             modalBtn.setAttribute('type', 'button')
             modalBtn.setAttribute('data-bs-toggle', 'modal')
-            modalBtn.setAttribute('data-bs-target', '#FilmModal')
-            modalBtn.className = 'btn btn-light text-center Ghibli-btn'
+            // This is a key attribute -> target of the button to #FilmModal${array index} - each button in every card will target to the modal create with data of that array
+            modalBtn.setAttribute('data-bs-target', `#FilmModal${i}`)
 
 
             //* Create Div
-
             // creates <div> element and stored in variable
             var colDiv = document.createElement('div')
             // add class name to this <div> -> .col                                  = for bootstrap card styling
@@ -119,7 +113,6 @@ class FilmCards {
             cardDiv.appendChild(cardBodyDiv)
 
             //* Output - Test Display
-
             // Appended = col -> display = appended whole card to display in HTML file
             // let cardDisplay = this.cardDisplay
             document.getElementById('cardDisplay').appendChild(colDiv)
@@ -128,61 +121,165 @@ class FilmCards {
 
 
 
+            //? Content for Modal
+            // these steps are pretty much the same thing as the above steps
+
+            var modalDiv1 = document.createElement('div')
+            modalDiv1.className = ('modal fade')
+            // This is a id of Modal that create with #FilmModal${array index} -> each button in FilmCard will target to modal that had data of the same array index
+            // Therefore, each button in FilmCard will open modal that contains information about that film
+            modalDiv1.id = (`FilmModal${i}`)
+            modalDiv1.setAttribute('aria-labelledby', 'exampleModalLabel')
+            modalDiv1.setAttribute('aria-hidden', 'true')
+            var modalDiv2 = document.createElement('div')
+            modalDiv2.className = ('modal-dialog modal-xl')
+            var modalContent = document.createElement('div')
+            modalContent.className = ('modal-content')
 
 
+            //* Header part
+            var modalHeader = document.createElement('div')
+            modalHeader.className = ('modal-header text-light')
+
+            var modalTitle = document.createElement('h5')
+            modalTitle.className = ('modal-title')
+            var modalTitleText = document.createTextNode(data[i].title);
+            modalTitle.appendChild(modalTitleText)
+
+            var modalCloseBtn = document.createElement('button')
+            modalCloseBtn.setAttribute('type', 'button')
+            modalCloseBtn.setAttribute('data-bs-dismiss', 'modal')
+            modalCloseBtn.setAttribute('aria-label', 'Close')
+            modalCloseBtn.className = ('btn-close')
+
+            //* Body Part
+
+            var modalBody = document.createElement('div')
+            modalBody.className = ('modal-body')
+
+            // card img in modal body
+            var modalCard = document.createElement('div')
+            modalCard.className = ('card bg-dark text-white m-4 mt-2 mb-2')
+            var modalCardImg = document.createElement('img')
+            modalCardImg.className = ('card-img')
+            modalCardImg.setAttribute('src', data[i].movie_banner)
+            var modalImgOverlay = document.createElement('div')
+            modalImgOverlay.className = ('card-img-overlay')
+            var originalOverlay = document.createElement('h5')
+            originalOverlay.className = ('card-title')
+            var originalOverlayText = document.createTextNode(data[i].original_title);
+            modalImgOverlay.appendChild(originalOverlay)
+            originalOverlay.appendChild(originalOverlayText)
+
+            //* Card-body in Modal body
+            var modalCardBody = document.createElement('div')
+            modalCardBody.className = ('card-body text-center p-5')
+
+            // Original Title
+            var filmOrginalTitle = document.createElement('h1');
+            // creates textnode that had a value same as title in data array -> stored in variable
+            var originalTitleText = document.createTextNode(data[i].original_title);
+            // add class name to this <h1> in order to use card style from bootstrap
+            filmOrginalTitle.className = 'card-title mb-2 mt-3'
+            // append originalTitleText to filmOrginalTitle, so <h1> have same text as the one that been pulled out of the array in it
+            filmOrginalTitle.appendChild(originalTitleText)
+            // Film Title
+            var filmsTitle = document.createElement('h1');
+            // creates textnode that had a value same as title in data array -> stored in variable
+            var titleText = document.createTextNode(data[i].title);
+            // add class name to this <h1> in order to use card style from bootstrap
+            filmsTitle.className = 'card-title mb-2'
+            filmsTitle.id = 'ModalFilmTitle'
+            // append titleText to filmsTitle, so <h1> have same text as the one that been pulled out of the array in it
+            filmsTitle.appendChild(titleText)
+
+            // Director
+            var filmDirector = document.createElement('p');
+            var directorText = document.createTextNode('Director : ' + data[i].director);
+            filmDirector.className = 'card-text mt-5 text-start'
+            filmDirector.appendChild(directorText)
+            // Producer
+            var filmsProducer = document.createElement('p');
+            var producerText = document.createTextNode('Producer : ' + data[i].producer);
+            filmsProducer.className = 'card-text text-start'
+            filmsProducer.appendChild(producerText)
+            // Release Date
+            var filmsRelease = document.createElement('p');
+            var releaseText = document.createTextNode('Release Date : ' + data[i].release_date);
+            filmsRelease.className = 'card-text text-start'
+            filmsRelease.appendChild(releaseText)
+            // Rating Score
+            var filmsRating = document.createElement('p');
+            var ratingText = document.createTextNode('Rating Score : ' + data[i].rt_score);
+            filmsRating.className = 'card-text text-start'
+            filmsRating.appendChild(ratingText)
+            // Running Time
+            var filmsTime = document.createElement('p');
+            var timeText = document.createTextNode('Running Time : ' + data[i].running_time + ' mins');
+            filmsTime.className = 'card-text text-start'
+            filmsTime.appendChild(timeText)
+            // Description
+            var filmsDes = document.createElement('p');
+            var desText = document.createTextNode('Description : ' + data[i].description);
+            filmsDes.className = 'card-text mb-5 text-start'
+            filmsDes.appendChild(desText)
+
+
+            //* Modal Footer
+            var modalFooter = document.createElement('div')
+            modalFooter.className = ('modal-footer text-light')
+            var modalFooterBtn = document.createElement('button')
+            var footerBtnText = document.createTextNode('Close')
+            modalFooterBtn.setAttribute('type', 'button')
+            modalFooterBtn.setAttribute('data-bs-dismiss', 'modal')
+            modalFooterBtn.className = ('btn Ghibli-btn')
+            modalFooterBtn.appendChild(footerBtnText)
+
+
+
+
+
+            //* Append child
+
+            // header
+            modalHeader.appendChild(modalTitle)
+            modalHeader.appendChild(modalCloseBtn)
+
+            // Cardbody
+            modalCardBody.appendChild(filmOrginalTitle)
+            modalCardBody.appendChild(filmsTitle)
+            modalCardBody.appendChild(filmDirector)
+            modalCardBody.appendChild(filmsProducer)
+            modalCardBody.appendChild(filmsRelease)
+            modalCardBody.appendChild(filmsRating)
+            modalCardBody.appendChild(filmsTime)
+            modalCardBody.appendChild(filmsDes)
+
+            // Modalcard
+            modalCard.appendChild(modalCardImg)
+            modalCard.appendChild(modalImgOverlay)
+            modalCard.appendChild(modalCardBody)
+
+            // ModalBody
+            modalBody.appendChild(modalCard)
+
+            // Modal Footer
+            modalFooter.appendChild(modalFooterBtn)
+
+            // Overall
+            modalContent.appendChild(modalHeader)
+            modalContent.appendChild(modalBody)
+            modalContent.appendChild(modalFooter)
+            modalDiv2.appendChild(modalContent)
+            modalDiv1.appendChild(modalDiv2)
+
+            // Appended all content created for modal to modal container -> modal will show when the button clicked
+            document.getElementById('modalContainer').appendChild(modalDiv1)
         }
-
     }
-
-    // //* Search Film with Title - Function 
-    // // create 'onkeyup' search() function - eventlistener already been assign to onkeyup by adding attribute in <input>
-    // search = () => {
-    //     //* Variable for search function
-    //     // Get value from what user type in the Textbox and covert it to lower case, 
-    //     const searchInput = document.getElementById('searchInput').value.toLowerCase()
-    //     // const Display = document.getElementById('Display') -> this variable is needed for this function as well but it already been assign at the top of the page
-    //     // This variable contains all element with the '.col' -> possible when we use 'querySelectorAll'
-    //     // .col -> card -> img
-    //     //              -> card-body -> h1
-    //     //                           -> p   
-    //     const filmCard = document.querySelectorAll('.col')
-    //     // This variable contains h1 -> Film titles
-    //     const titleH1 = document.getElementsByTagName('h1')
-
-    //     // for loop, so we can re-arrange the film card according to the search value
-    //     for (let i = 0; i < titleH1.length; i++) {
-    //         // get the first <h1> in the filmCard(.col) and store that in the variable called "match"
-    //         let match = filmCard[i].getElementsByTagName('h1')[0]
-    //         // create if and pass on match (first h1 in .col, which contains title of film)
-    //         if (match) {
-    //             // get content in match(<h1>) and store it in 'textValue'
-    //             let textValue = match.textContent || match.innerHTML
-    //             // create another if statement -> take textValue and convert it into lower case
-    //             //                             -> indexOf(searchInput) -> each array(letter) in the searchinput value(converted to lower case)
-    //             //                             ->       > -1           -> greater than '-1' means if its true or if it contain that array(letter)
-    //             // Basically, it means if the value that user type in the 'searchInput' match the content in '<h1>' -> it will do the following code 
-    //             if (textValue.toLowerCase().indexOf(searchInput) > -1) {
-    //                 // if the above condition is true, then card will be display 'block'
-    //                 filmCard[i].style.display = "block"
-    //             } else {
-    //                 // if its not, then card will be display 'none'
-    //                 filmCard[i].style.display = "none"
-    //             }
-    //         }
-    //     }
-
-    // }
-
-
 }
-
-
-
-
-
-
-
-const displayFilmCard = new FilmCards()
-displayFilmCard.loadData()
+// Store Class in variable and call the loadData() method
+const displayFilmCards = new FilmCards()
+displayFilmCards.loadData()
 
 

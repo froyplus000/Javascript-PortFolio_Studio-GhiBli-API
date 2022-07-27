@@ -1,45 +1,7 @@
-// This variable contain a url of an API
-// const apiURL = 'https://ghibliapi.herokuapp.com/films'
-// This variable contain all card and data (including img, title and description) of Studio GHIBLI Films. It will be use in searchinput as well
-
-
-
-//* Fetch Data - Change this to OOP Class
-// when we use await we need to put async in front of the function
-// async function loadData() {
-//     // wrap everything in to try{} -> try run this code first
-//     try {
-//         // fetch data from api, needed to have await otherwise it will return promise, store it in 'response'
-//         const response = await fetch('https://ghibliapi.herokuapp.com/films')
-//         // filter response to json and store it in data variable
-//         const data = await response.json()
-//         // log 'data' in the console
-//         console.log(data)
-//         // call 'displayCarousel(data)' function
-//         displayCarousel(data)
-
-
-//         // catch (error){} -> catch error data and stored it in (error)
-//     } catch (error) {
-//         // log error to console if our code in try have any error
-//         console.log(error)
-//     }
-// }
-// loadData()
-
-
-
-
-
-// Start OOP
-
-
-
-// import FetchData from "./FetchData.js"
-
 class FilmCarousel {
 
     constructor() {
+        // creates empty array variable
         this.data = [];
     }
 
@@ -51,13 +13,11 @@ class FilmCarousel {
         try {
             // fetch data from api, needed to have await otherwise it will return promise, store it in 'response'
             const response = await fetch('https://ghibliapi.herokuapp.com/films')
-            // filter response to json and store it in data variable
+            // filter response to json and store it in 'this.data' variable
             this.data = await response.json()
-            // log 'data' in the console
+            // log 'this.data' in the console
             console.log(this.data)
-            // call 'displayCarousel(data)' function
-
-
+            // call 'displayCarousel(data)' function - need to add 'this.' when call a function inside a function
             this.displayCarousel(this.data)
 
 
@@ -91,8 +51,7 @@ class FilmCarousel {
                                            5 - [3] Kiki's Delivery Service, 96
         */
 
-        // Display Carousel
-
+        //? Display Carousel - with .innerHTML
         document.getElementById('TopRateFilm').innerHTML = `
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#TopRateFilm" data-bs-slide-to="0" class="active"
@@ -108,7 +67,7 @@ class FilmCarousel {
         </div>
 
         <div class="carousel-inner">
-
+        
             <!-- 1st -->
             <div class="carousel-item active">
                 <img src="${data[4].movie_banner}" class="d-block w-100" alt="${data[4].title}">
@@ -167,14 +126,12 @@ class FilmCarousel {
             <span class="visually-hidden">Next</span>
         </button>
         `
-
-
     }
-
 }
 
-const display = new FilmCarousel()
-display.loadData()
-// display.displayCarousel()
+// Store Class in variable and call the loadData() method
+const displayFilmCarousel = new FilmCarousel()
+displayFilmCarousel.loadData()
+
 
 
