@@ -11,7 +11,7 @@ class FilmCards {
         // wrap everything in to try{} -> try run this code first
         try {
             // fetch data from api, needed to have await otherwise it will return promise, store it in 'response'
-            const response = await fetch('https://ghibliapi.herokuapp.com/films')
+            const response = await fetch('https://ghibliapi.vercel.app/films')
             // filter response to json and store it in this.data variable
             this.data = await response.json()
             // log 'this.data' in the console
